@@ -10,7 +10,10 @@ class Stack:
 
     def pop(self):
         self.stackList.pop(-1)
-        return self.stackList[-1]
+        if self.peek() is not False:
+            return self.stackList[-1]
+        else:
+            pass
 
     def peek(self):
         return self.stackList[-1]
@@ -21,32 +24,50 @@ class Stack:
 
 def check(stack):
     stack_list = list(stack)
-    rounded = Stack()
-    curly = Stack()
-    square = Stack()
+    s = stack()
     for item in stack_list:
         if item == '(':
-            rounded.push(item)
+            s.push(item)
         elif item == ')':
-            if rounded.peek() is not False:
-                rounded.pop()
+            if s.peek() is not False:
+                s.pop()
             else:
-                rounded.push(item)
+                s.push(item)
         if item == '{':
-            curly.push(item)
+            s.push(item)
         elif item == '}':
-            if curly.peek() is not False:
-                curly.pop()
+            if s.peek() is not False:
+                s.pop()
             else:
-                curly.push(item)
+                s.push(item)
         if item == '[':
-            square.push(item)
+            s.push(item)
         elif item == ']':
-            if square.peek() is not False:
-                square.pop()
+            if s.peek() is not False:
+                s.pop()
             else:
-                square.push(item)
-    if square.size() == 0 and curly.size() == 0 and rounded.size() == 0:
+                s.push(item)
+    if s.size() == 0 and s.size() == 0 and s.size() == 0:
         print('Balanced')
     else:
         print('Unbalanced')
+
+
+if __name__ == '__main__':
+    a = "(((([{}]))))"
+    b = "[([])((([[[]]])))]{()}"
+    c = "{{[()]}}"
+    d = "}{}"
+    e = "{{[(])]}}"
+    f = "[[{())}]"
+    check(a)
+    print('-'*5)
+    check(b)
+    print('-'*5)
+    check(c)
+    print('-'*5)
+    check(d)
+    print('-'*5)
+    check(e)
+    print('-'*5)
+    check(f)
